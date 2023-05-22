@@ -1,0 +1,15 @@
+java 의 특징
+1.운영체제에 상관없이 독립적으로 동작한다.
+2. 객체지향 언어 oop
+3. 가비지 컬렉터
+4. 네트워크 분산 처리 지원
+5. 멀티 쓰레드
+6. 동적 로딩 지원
+
+
+오늘의토픽
+1. java의 기본데이터 타입과 참조 데이터 타입의 차이
+https://velog.io/@gillog/%EC%9B%90%EC%8B%9C%ED%83%80%EC%9E%85-%EC%B0%B8%EC%A1%B0%ED%83%80%EC%9E%85Primitive-Type-Reference-Type#%EC%B0%B8%EC%A1%B0-%ED%83%80%EC%9E%85reference-type
+https://velog.io/@gkscodus11/%EC%9E%90%EB%B0%94%EC%9D%98-%EC%B0%B8%EC%A1%B0%ED%83%80%EC%9E%85
+
+2. jdk 와 jre와 jvm 의 차이
