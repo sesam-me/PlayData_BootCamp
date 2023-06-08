@@ -16,7 +16,6 @@ public class MovieView {
     public void mainMenu() {
         // mainMenu..
         Scanner sc = new Scanner(System.in);
-        MovieController controller = MovieController.getController();
 
         do {
             System.out.println("========== O Movie System 0.1v ==========");
@@ -42,6 +41,74 @@ public class MovieView {
                 case 0 :
                     // 종료
                     System.out.println("O Movie 시스템을 종료 합니다.");
+                    return;
+
+                default :
+                    System.out.println("잘못된 메뉴를 선택 하셨습니다. 다시 선택 해 주세요.");
+                    break;
+            }
+        } while(true);
+    }
+
+    public void adminMenu() {
+        // mainMenu..
+        Scanner sc = new Scanner(System.in);
+
+        do {
+            System.out.println("========== ADMIN 모드에 오신걸 환영 합니다. ==========");
+            System.out.println("========== 메뉴를 선택 해주세요 ==========");
+            System.out.println("1. 회원 리스트 조회하기");
+            System.out.println("2. 영화 추가하기");
+            System.out.println("0. 로그아웃");
+            System.out.print("입력 : ");
+
+            int menu = Integer.parseInt(sc.nextLine());
+
+            switch(menu) {
+                case 1 :
+                    // 회원리스트 조회.
+                    System.out.println("회원 리스트 조회하기");
+                    break;
+                case 2 :
+                    // 영화 추가하기
+                    MovieController.getController().insertMovieInfo();
+                    break;
+                case 0 :
+                    // 종료
+                    System.out.println("어드민 시스템을 종료 합니다.");
+                    return;
+
+                default :
+                    System.out.println("잘못된 메뉴를 선택 하셨습니다. 다시 선택 해 주세요.");
+                    break;
+            }
+        } while(true);
+    }
+
+    public void customerMenu() {
+        // mainMenu..
+        Scanner sc = new Scanner(System.in);
+
+        do {
+            System.out.println("========== 안녕하세요 movie_hunter 입니다. ==========");
+            System.out.println("========== 메뉴를 선택 해주세요 ==========");
+            System.out.println("1. test");
+            System.out.println("0. 종료");
+            System.out.print("입력 : ");
+
+            int menu = Integer.parseInt(sc.nextLine());
+
+            switch(menu) {
+                case 1 :
+                    // 회원리스트 조회.
+                    System.out.println("test");
+                    break;
+                case 2 :
+
+                    break;
+                case 0 :
+                    // 종료
+                    System.out.println("어드민 시스템을 종료 합니다.");
                     return;
 
                 default :
