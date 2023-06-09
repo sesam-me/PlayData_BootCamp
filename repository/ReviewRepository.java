@@ -1,11 +1,16 @@
 package repository;
 
 import config.JdbcConnection;
+import controller.UserController;
 import domain.dto.ReviewDto;
+import domain.dto.WatchedMovies;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReviewRepository {
     private static ReviewRepository repository;
@@ -15,12 +20,13 @@ public class ReviewRepository {
         return repository;
     }
 
-    public void insertReview(ReviewDto dto){
+    public int insertReview(ReviewDto dto){
 
         Connection conn = new JdbcConnection().getJdbc();
 
-        String sql ="insert into review(rating,date,contents,user_seq,movie_seq)" +
-                "values (?,?,?,?,?)";
+        int result = 0;
+
+        String sql = "insert into review (rating, review_date, contents, user_seq, movie_seq) values(?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement psmt = conn.prepareStatement(sql);
@@ -29,11 +35,20 @@ public class ReviewRepository {
             psmt.setString(3,dto.getContents());
             psmt.setInt(4,dto.getUser_seq());
             psmt.setInt(5,dto.getMovie_seq());
-            psmt.executeUpdate();
+
+            int rowsAffected = psmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                result = 1; // 요청이 성공한 경우 result 값을 1.
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
+
+
+        return result;
     }
 
     public void deleteReviewBySeq(int review_seq){
@@ -48,6 +63,38 @@ public class ReviewRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<WatchedMovies> myWatchedMovies() {
+        Connection conn = new JdbcConnection().getJdbc();
+
+        List<WatchedMovies> watchedMovieList = new ArrayList<>();
+
+        String sql = "SELECT m.movie_seq, m.title, u.user_seq, u.user_id FROM movie m JOIN watched_movie wm ON m.movie_seq = wm.movie_seq JOIN user u ON wm.user_seq = u.user_seq where u.user_id = ?";
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setString(1, UserController.loginUserId);
+
+            ResultSet resultSet = psmt.executeQuery();
+
+            while (resultSet.next()) {
+                WatchedMovies watchedMovies = new WatchedMovies(); // 새로운 객체 생성
+
+                watchedMovies.setMovie_seq(resultSet.getInt("movie_seq"));
+                watchedMovies.setUser_seq(resultSet.getInt("user_seq"));
+                watchedMovies.setTitle(resultSet.getString("title"));
+                watchedMovies.setUserId(resultSet.getString("user_id"));
+
+                watchedMovieList.add(watchedMovies);
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return watchedMovieList;
     }
 
 }

@@ -1,7 +1,11 @@
 package service;
 
+import controller.UserController;
 import domain.dto.ReviewDto;
+import domain.dto.UserDto;
+import domain.dto.WatchedMovies;
 import repository.ReviewRepository;
+import repository.UserRepository;
 
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -17,15 +21,19 @@ public class ReviewService {
         return service;
     }
 
-    public void writeReview(){
+    public int writeReview(int selectMovieNum){
+        Scanner sc = new Scanner(System.in);
 
-        System.out.println("리뷰 작성할 유저 번호를 입력하세요");
-        int user_seq = Integer.parseInt(sc.nextLine());
+        UserDto userDto = UserRepository.getRepository().findByUserId(UserController.loginUserId);
 
-        System.out.println("리뷰 작성할 영화 번호를 입력하세요");
-        int movie_seq = Integer.parseInt(sc.nextLine());
+        // 현재 로그인한 user_seq
+        int user_seq = userDto.getUser_seq();
 
-        System.out.println("영화의 평점을 입력하세요");
+        // 내가 본 영화중 고른 movie_seq
+        int movie_seq = selectMovieNum;
+
+
+        System.out.println("영화의 평점을 입력하세요.");
         int rating = Integer.parseInt(sc.nextLine());
 
         System.out.println("영화의 리뷰 내용을 입력하세요");
@@ -36,7 +44,7 @@ public class ReviewService {
 
         ReviewDto dto= new ReviewDto(rating,nowDate,contents,user_seq,movie_seq);
 
-        reviewRepository.insertReview(dto);
+        return ReviewRepository.getRepository().insertReview(dto);
     }
 
     public void deleteReview(){
@@ -45,5 +53,27 @@ public class ReviewService {
         int review_seq = Integer.parseInt(sc.nextLine());
 
         reviewRepository.deleteReviewBySeq(review_seq);
+    }
+
+    public void myWatchedMovies() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("리뷰할 영화의 번호를 선택 해주세요.");
+
+        for (WatchedMovies watchedMovies : ReviewRepository.getRepository().myWatchedMovies()) {
+            System.out.print(watchedMovies.getMovie_seq() + ". ");
+            System.out.print(watchedMovies.getTitle());
+            System.out.println();
+        }
+
+        System.out.print("입력 : ");
+        int movieSelectNum = Integer.parseInt(sc.nextLine());
+
+        if (writeReview(movieSelectNum) == 1) {
+            System.out.println("리뷰 등록이 완료 되었습니다.");
+            return ;
+        }
+
+        System.out.println("리뷰 등록 에러");
     }
 }

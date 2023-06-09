@@ -1,9 +1,8 @@
 package view;
 
-import controller.MovieController;
+import controller.UserController;
 import controller.ReviewController;
 import domain.dto.UserDto;
-import repository.MovieRepository;
 
 import java.util.Scanner;
 
@@ -74,7 +73,6 @@ public class MovieView {
                     break;
                 case 2 :
                     // 영화 추가하기
-                    MovieController.getController().insertMovieInfo();
                     break;
                 case 0 :
                     // 종료
@@ -95,7 +93,7 @@ public class MovieView {
         do {
             System.out.println("========== 안녕하세요 movie_hunter 입니다. ==========");
             System.out.println("========== 메뉴를 선택 해주세요 ==========");
-            System.out.println("1. test");
+            System.out.println("1. 영화 시청");
             System.out.println("2. 리뷰 작성");
             System.out.println("0. 종료");
             System.out.print("입력 : ");
@@ -104,8 +102,8 @@ public class MovieView {
 
             switch(menu) {
                 case 1 :
-                    // 회원리스트 조회.
-                    System.out.println("test");
+                    // 영화 시청..
+
                     break;
                 case 2 :
                     // 리뷰 작성..
@@ -126,7 +124,7 @@ public class MovieView {
     public void loginMenu() {
         // adminMenu..
         Scanner sc = new Scanner(System.in);
-        MovieController controller = MovieController.getController();
+        UserController controller = UserController.getController();
 
         System.out.println("========== (LOGIN MODE)  ==========");
 
@@ -141,7 +139,7 @@ public class MovieView {
 
     public void signUpMode() {
         Scanner sc = new Scanner(System.in);
-        MovieController controller = MovieController.getController();
+        UserController controller = UserController.getController();
 
         System.out.println("========== (SignUp MODE)  ==========");
 
@@ -154,7 +152,12 @@ public class MovieView {
         System.out.println("비밀번호를 입력 해주세요.");
         String userPwd = sc.nextLine();
 
-        UserDto userDto = new UserDto(userId, userEmail, userPwd);
+        UserDto userDto = new UserDto();
+
+        userDto.setUserId(userId);
+        userDto.setUserEmail(userEmail);
+        userDto.setUserPwd(userPwd);
+
         controller.signUp(userDto);
 
     }

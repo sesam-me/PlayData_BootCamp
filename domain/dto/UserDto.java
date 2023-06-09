@@ -1,25 +1,31 @@
 package domain.dto;
 
 public class UserDto {
+
+    private int user_seq;
     private String userId;
     private String userEmail;
     private String userPwd;
 
     public UserDto() {};
 
-    public UserDto(String userId, String userEmail, String userPwd) {
+    public UserDto(int user_seq, String userId, String userEmail, String userPwd) {
+        this.user_seq = user_seq;
         this.userId = userId;
         this.userEmail = userEmail;
         this.userPwd = userPwd;
     }
 
-    public String getUserId() {
-        return userId;
+    public int getUser_seq() {
+        return user_seq;
     }
 
-    @Override
-    public String toString() {
-        return userId + " 님 안녕하세요 ? ";
+    public void setUser_seq(int user_seq) {
+        this.user_seq = user_seq;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     public void setUserId(String userId) {

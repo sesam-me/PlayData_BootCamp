@@ -1,10 +1,7 @@
-import config.JdbcConnection;
-import controller.MovieController;
-
-import java.sql.Connection;
+import controller.UserController;
 
 public class Main {
     public static void main(String[] args) {
-        MovieController.getController().mainMenu();
+        UserController.getController().mainMenu();
     }
 }
