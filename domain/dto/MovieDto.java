@@ -1,10 +1,11 @@
 package domain.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class MovieDto {
     private String title;
-    private Date releaseDate;
+    private LocalDate releaseDate;
     private int duration;
     private String description;
     private String rating;
@@ -13,7 +14,7 @@ public class MovieDto {
 
     public MovieDto() {};
 
-    public MovieDto(String title, Date releaseDate, int duration, String description, String rating, String genre, String director) {
+    public MovieDto(String title, LocalDate releaseDate, int duration, String description, String rating, String genre, String director) {
         this.title = title;
         this.releaseDate = releaseDate;
         this.duration = duration;
@@ -31,11 +32,11 @@ public class MovieDto {
         this.title = title;
     }
 
-    public Date getReleaseDate() {
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
     }
 
@@ -77,5 +78,18 @@ public class MovieDto {
 
     public void setDirector(String director) {
         this.director = director;
+    }
+
+    @Override
+    public String toString() {
+        return "MovieDto{" +
+                "title='" + title + '\'' +
+                ", releaseDate=" + releaseDate +
+                ", duration=" + duration +
+                ", description='" + description + '\'' +
+                ", rating='" + rating + '\'' +
+                ", genre='" + genre + '\'' +
+                ", director='" + director + '\'' +
+                '}';
     }
 }

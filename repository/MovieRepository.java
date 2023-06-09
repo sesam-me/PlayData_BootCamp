@@ -1,6 +1,7 @@
 package repository;
 
 import config.JdbcConnection;
+import domain.dto.MovieDto;
 import domain.dto.UserDto;
 
 import java.sql.Connection;
@@ -43,5 +44,12 @@ public class MovieRepository {
         return user;
     }
 
+    public int insertMovieInfo(MovieDto movieDto) {
+
+        System.out.println(movieDto);
+
+
+        return 0;
+    }
 
 }
