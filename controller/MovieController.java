@@ -2,6 +2,7 @@ package controller;
 
 import domain.dto.MovieDto;
 import domain.dto.UserDto;
+import repository.MovieRepository;
 import service.MovieService;
 import view.MovieView;
 
@@ -13,7 +14,8 @@ import java.util.Scanner;
 public class MovieController {
     // 객체 싱글톤
     private static MovieController controller;
-
+//        MovieControlle의 인스턴스인 controller
+//        만약 controller에 아무런 입력도 없다면(null) 자체적으로 선언을 하고 그렇지 않다면 기존 인스턴스인controller를 반환한다.
     public static MovieController getController() {
         if(controller == null) controller = new MovieController();
         return controller;
@@ -43,8 +45,10 @@ public class MovieController {
         MovieView.getView().customerMenu();
     }
 
-    public void signUp(String userId, String userPwd) {
-        System.out.println("회원가입 기능");
+    public void signUp(UserDto dto) {
+        System.out.println("회원가입완료");
+        MovieService.getService().signUp(dto);
+
     }
 
     public void insertMovieInfo() {
