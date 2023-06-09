@@ -44,6 +44,27 @@ public class MovieRepository {
         return user;
     }
 
+    public int signUp(UserDto dto){
+        Connection conn = new JdbcConnection().getJdbc();
+
+        String sql = "insert into User (user_id, user_email, user_pwd)\n" +
+                "value (?, ?, ?);";
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setString(1, dto.getUserId());
+            psmt.setString(2, dto.getUserEmail());
+            psmt.setString(3, dto.getUserPwd());
+            if(psmt.executeUpdate() == 0){
+                System.out.println("insert error");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+
+    }
+
     public int insertMovieInfo(MovieDto movieDto) {
 
         System.out.println(movieDto);

@@ -16,7 +16,12 @@ public class MovieService {
         return MovieRepository.getRepository().login(userId, userPwd);
     }
 
+    public int signUp(UserDto dto) {
+        return MovieRepository.getRepository().signUp(dto);
+    }
+
     public int insertMovieInfo(MovieDto movieDto) {
+
         return MovieRepository.getRepository().insertMovieInfo(movieDto);
     }
 

@@ -1,6 +1,8 @@
 package view;
 
 import controller.MovieController;
+import domain.dto.UserDto;
+import repository.MovieRepository;
 
 import java.util.Scanner;
 
@@ -143,9 +145,14 @@ public class MovieView {
         System.out.println("아이디를 입력 해주세요.");
         String userId = sc.nextLine();
 
+        System.out.println("Email을 입력 해주세요.");
+        String userEmail = sc.nextLine();
+
         System.out.println("비밀번호를 입력 해주세요.");
         String userPwd = sc.nextLine();
 
-        controller.signUp(userId, userPwd);
+        UserDto userDto = new UserDto(userId, userEmail, userPwd);
+        controller.signUp(userDto);
+
     }
 }
