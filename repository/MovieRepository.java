@@ -47,6 +47,8 @@ public class MovieRepository {
     public int signUp(UserDto dto){
         Connection conn = new JdbcConnection().getJdbc();
 
+        int result = 0;
+
         String sql = "insert into User (user_id, user_email, user_pwd)\n" +
                 "value (?, ?, ?);";
 
@@ -56,12 +58,13 @@ public class MovieRepository {
             psmt.setString(2, dto.getUserEmail());
             psmt.setString(3, dto.getUserPwd());
             if(psmt.executeUpdate() == 0){
-                System.out.println("insert error");
+                result = 1;
+            } else {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return 0;
+        return result;
 
     }
 

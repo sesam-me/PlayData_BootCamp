@@ -46,8 +46,12 @@ public class MovieController {
     }
 
     public void signUp(UserDto dto) {
-        System.out.println("회원가입완료");
-        MovieService.getService().signUp(dto);
+
+        int result = MovieService.getService().signUp(dto);
+
+        if (result == 0) {
+            System.out.println("회원가입에 성공 하셨습니다.");
+        }
 
     }
 
