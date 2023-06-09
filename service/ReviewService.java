@@ -21,14 +21,17 @@ public class ReviewService {
 
         System.out.println("리뷰 작성할 유저 번호를 입력하세요");
         int user_seq = Integer.parseInt(sc.nextLine());
+
         System.out.println("리뷰 작성할 영화 번호를 입력하세요");
         int movie_seq = Integer.parseInt(sc.nextLine());
+
         System.out.println("영화의 평점을 입력하세요");
         int rating = Integer.parseInt(sc.nextLine());
+
         System.out.println("영화의 리뷰 내용을 입력하세요");
         String contents = sc.nextLine();
 
-        LocalDate now =LocalDate.now();
+        LocalDate now = LocalDate.now();
         java.sql.Date nowDate = java.sql.Date.valueOf(now);
 
         ReviewDto dto= new ReviewDto(rating,nowDate,contents,user_seq,movie_seq);

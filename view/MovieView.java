@@ -1,6 +1,7 @@
 package view;
 
 import controller.MovieController;
+import controller.ReviewController;
 import domain.dto.UserDto;
 import repository.MovieRepository;
 
@@ -95,6 +96,7 @@ public class MovieView {
             System.out.println("========== 안녕하세요 movie_hunter 입니다. ==========");
             System.out.println("========== 메뉴를 선택 해주세요 ==========");
             System.out.println("1. test");
+            System.out.println("2. 리뷰 작성");
             System.out.println("0. 종료");
             System.out.print("입력 : ");
 
@@ -106,11 +108,12 @@ public class MovieView {
                     System.out.println("test");
                     break;
                 case 2 :
-
+                    // 리뷰 작성..
+                    ReviewController.getController().insertReview();
                     break;
                 case 0 :
                     // 종료
-                    System.out.println("어드민 시스템을 종료 합니다.");
+                    System.out.println("감사합니다. movie_hunter 였습니다.");
                     return;
 
                 default :

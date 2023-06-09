@@ -12,10 +12,10 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class MovieController {
+    public static String loginUserId;
     // 객체 싱글톤
     private static MovieController controller;
-//        MovieControlle의 인스턴스인 controller
-//        만약 controller에 아무런 입력도 없다면(null) 자체적으로 선언을 하고 그렇지 않다면 기존 인스턴스인controller를 반환한다.
+
     public static MovieController getController() {
         if(controller == null) controller = new MovieController();
         return controller;
@@ -42,6 +42,7 @@ public class MovieController {
         }
 
         // 일반고객 모드..
+        loginUserId = user.getUserId();
         MovieView.getView().customerMenu();
     }
 
