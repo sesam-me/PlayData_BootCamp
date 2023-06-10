@@ -13,10 +13,10 @@ public class MovieDto {
     private String rating;
     private String genre;
     private String director;
-
+    private String link;
     public MovieDto() {};
 
-    public MovieDto(int movie_seq, String title, LocalDate releaseDate, int duration, String description, String rating, String genre, String director) {
+    public MovieDto(int movie_seq, String title, LocalDate releaseDate, int duration, String description, String rating, String genre, String director, String link) {
         this.movie_seq = movie_seq;
         this.title = title;
         this.releaseDate = releaseDate;
@@ -25,6 +25,7 @@ public class MovieDto {
         this.rating = rating;
         this.genre = genre;
         this.director = director;
+        this.link = link;
     }
 
     public int getMovie_seq() {
@@ -89,5 +90,13 @@ public class MovieDto {
 
     public void setDirector(String director) {
         this.director = director;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 }

@@ -50,6 +50,7 @@ public class MovieRepository {
                 movieDto.setRating(resultSet.getString("rating"));
                 movieDto.setGenre(resultSet.getString("genre"));
                 movieDto.setDirector(resultSet.getString("director"));
+                movieDto.setLink(resultSet.getString("link"));
 
                 shownMoviesList.add(movieDto);
 
