@@ -20,4 +20,8 @@ public class ReviewController {
     public void myReviewList() {
         ReviewService.getService().myReviewList();
     }
+
+    public void movieReview() {
+        ReviewService.getService().movieReview();
+    }
 }

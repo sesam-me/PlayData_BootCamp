@@ -131,4 +131,37 @@ public class ReviewRepository {
 
     }
 
+    public List<MyReviewDto> movieReview(int moive_seq) {
+        Connection conn = new JdbcConnection().getJdbc();
+
+        List<MyReviewDto> reviewList = new ArrayList<>();
+
+        String sql = "select m.title, r.rating, r.contents, r.review_date from movie m left join review r on m.movie_seq = r.movie_seq where m.movie_seq = ?";
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, moive_seq);
+
+            ResultSet resultSet = psmt.executeQuery();
+
+            while (resultSet.next()) {
+                // 새로운 객체 생성
+                MyReviewDto myReviewDto = new MyReviewDto();
+
+                myReviewDto.setTitle(resultSet.getString("title"));
+                myReviewDto.setRating(resultSet.getInt("rating"));
+                myReviewDto.setContents(resultSet.getString("contents"));
+                myReviewDto.setReviewDate(resultSet.getDate("review_date"));
+
+                reviewList.add(myReviewDto);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return reviewList;
+
+    }
+
 }

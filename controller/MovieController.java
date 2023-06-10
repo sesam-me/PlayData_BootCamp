@@ -20,7 +20,8 @@ public class MovieController {
         Scanner sc = new Scanner(System.in);
 
         // 현재 상영중인 영화 리스트 조회 후 시청
-        System.out.println("시청 할 영화의 번호를 선택해주세요.");
+        System.out.println("현재 상영중인 영화 입니다. 시청 할 영화의 번호를 선택해주세요.");
+
 
         for (MovieDto movieList : MovieService.getService().shownMovies()) {
             System.out.print(movieList.getMovie_seq() + ". ");

@@ -96,6 +96,7 @@ public class CommonView {
             System.out.println("1. 영화 시청");
             System.out.println("2. 리뷰 작성");
             System.out.println("3. 내가 쓴 리뷰 보기");
+            System.out.println("4. 영화 별 리뷰 보기");
             System.out.println("0. 종료");
             System.out.print("입력 : ");
 
@@ -113,6 +114,10 @@ public class CommonView {
                 case 3 :
                     // 내가 쓴 리뷰 보기..
                     ReviewController.getController().myReviewList();
+                    break;
+                case 4 :
+                    // 영화 별 리뷰 보기..
+                    ReviewController.getController().movieReview();
                     break;
                 case 0 :
                     // 종료
