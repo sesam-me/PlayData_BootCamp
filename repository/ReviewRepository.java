@@ -4,6 +4,7 @@ import config.JdbcConnection;
 import controller.UserController;
 import domain.dto.MyReviewDto;
 import domain.dto.ReviewDto;
+import domain.dto.ReviewListDto;
 import domain.dto.WatchedMovies;
 
 import java.sql.Connection;
@@ -52,8 +53,10 @@ public class ReviewRepository {
         return result;
     }
 
-    public void deleteReviewBySeq(int review_seq){
+    public int deleteReviewBySeq(int review_seq){
         Connection conn = new JdbcConnection().getJdbc();
+
+        int result = 0;
 
         String sql ="delete from review where review_seq=?";
 
@@ -61,9 +64,16 @@ public class ReviewRepository {
             PreparedStatement psmt = conn.prepareStatement(sql);
             psmt.setInt(1,review_seq);
             psmt.executeUpdate();
+
+            if(psmt.executeUpdate() == 0){
+                result = 1;
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        return result;
     }
 
     public List<WatchedMovies> myWatchedMovies() {
@@ -162,6 +172,38 @@ public class ReviewRepository {
 
         return reviewList;
 
+    }
+
+    public List<ReviewListDto> findAllReviewList() {
+        Connection conn = new JdbcConnection().getJdbc();
+
+        List<ReviewListDto> reviewList = new ArrayList<>();
+
+        String sql = "select u.user_id, r.review_date, r.contents,r.rating, m.title, r.review_seq  from user u join review r on u.user_seq = r.user_seq join movie m on r.movie_seq = m.movie_seq;";
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet resultSet = psmt.executeQuery();
+
+            while (resultSet.next()) {
+                // 새로운 객체 생성
+                ReviewListDto reviewListDto = new ReviewListDto();
+
+                reviewListDto.setUserId(resultSet.getString("user_id"));
+                reviewListDto.setReviewDate(resultSet.getDate("review_date"));
+                reviewListDto.setContents(resultSet.getString("contents"));
+                reviewListDto.setRating(resultSet.getInt("rating"));
+                reviewListDto.setTitle(resultSet.getString("title"));
+                reviewListDto.setReview_seq(resultSet.getInt("review_seq"));
+
+                reviewList.add(reviewListDto);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return reviewList;
     }
 
 }

@@ -46,26 +46,25 @@ public class ReviewService {
         return ReviewRepository.getRepository().insertReview(dto);
     }
 
-    public void deleteReview(){
-
-        System.out.println("삭제할 리뷰의 번호를 입력하세요");
-        int review_seq = Integer.parseInt(sc.nextLine());
-
-        reviewRepository.deleteReviewBySeq(review_seq);
+    public int deleteReview(int review_seq){
+        return ReviewRepository.getRepository().deleteReviewBySeq(review_seq);
     }
 
     public void myWatchedMovies() {
         Scanner sc = new Scanner(System.in);
 
+        List<WatchedMovies> watchedList = ReviewRepository.getRepository().myWatchedMovies();
+
         System.out.println("리뷰할 영화의 번호를 선택 해주세요.");
 
-        if (ReviewRepository.getRepository().myWatchedMovies().size() == 0) {
+        // 내가 시청한 영화 리스트 받아오기.. 없다면 끝내자..
+        if (watchedList.size() == 0) {
             System.out.println("시청하신 영화가 없어요.");
-
             return ;
         }
 
-        for (WatchedMovies watchedMovies : ReviewRepository.getRepository().myWatchedMovies()) {
+        // 내가 본 영화 보여주기..
+        for (WatchedMovies watchedMovies : watchedList) {
             System.out.print(watchedMovies.getMovie_seq() + ". ");
             System.out.print(watchedMovies.getTitle());
             System.out.println();
@@ -74,6 +73,7 @@ public class ReviewService {
         System.out.print("입력 : ");
         int movieSelectNum = Integer.parseInt(sc.nextLine());
 
+        // 선택한 영화 시퀀스 들고 리뷰작성 으로..
         if (writeReview(movieSelectNum) == 1) {
             System.out.println("리뷰 등록이 완료 되었습니다.");
             return ;
@@ -83,12 +83,15 @@ public class ReviewService {
     }
 
     public void myReviewList() {
-        if (ReviewRepository.getRepository().myReviewList().size() == 0) {
+
+        List<MyReviewDto> myReviewList = ReviewRepository.getRepository().myReviewList();
+
+        if (myReviewList.size() == 0) {
             System.out.println("작성하신 리뷰가 없습니다");
             return ;
         }
 
-        for (MyReviewDto review : ReviewRepository.getRepository().myReviewList()) {
+        for (MyReviewDto review : myReviewList) {
             System.out.println("*******************");
             System.out.println(review.getTitle() + " 에 대해 " + review.getReviewDate() + " 에 작성하신 리뷰 입니다.");
             System.out.println("평점 : " + review.getRating());
@@ -103,6 +106,7 @@ public class ReviewService {
         // 현재 상영중인 영화 리스트 조회 후 시청
         System.out.println("현재 상영중인 영화 입니다. 어떤 영화의 리뷰를 보시겠어요 ?");
 
+        // 상영중인 영화 리스트
         for (MovieDto movieList : MovieService.getService().shownMovies()) {
             System.out.print(movieList.getMovie_seq() + ". ");
             System.out.print(movieList.getTitle());
@@ -112,6 +116,7 @@ public class ReviewService {
         System.out.print("입력 : ");
         int movieSelectNum = Integer.parseInt(sc.nextLine());
 
+        // 해당 영화의 리뷰 리스트
         for (MyReviewDto reviewList : ReviewRepository.getRepository().movieReview(movieSelectNum)) {
 
             if (reviewList.getContents() == null) {
@@ -127,5 +132,9 @@ public class ReviewService {
             System.out.println("*******************");
         }
 
+    }
+
+    public List<ReviewListDto> findAllReviewList() {
+        return ReviewRepository.getRepository().findAllReviewList();
     }
 }
