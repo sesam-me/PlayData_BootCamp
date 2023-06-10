@@ -5,6 +5,7 @@ import controller.UserController;
 import domain.dto.MovieDto;
 import domain.dto.UserDto;
 import domain.dto.WatchedMovies;
+import service.UserService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -73,7 +74,7 @@ public class MovieRepository {
         try {
             PreparedStatement psmt = conn.prepareStatement(sql);
             psmt.setInt(1, movie_seq);
-            psmt.setInt(2, UserController.loginUserSeq);
+            psmt.setInt(2, UserService.loginUserSeq);
 
             if(psmt.executeUpdate() == 1){
                 result = 1;

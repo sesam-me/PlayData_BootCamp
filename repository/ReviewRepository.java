@@ -6,6 +6,7 @@ import domain.dto.MyReviewDto;
 import domain.dto.ReviewDto;
 import domain.dto.ReviewListDto;
 import domain.dto.WatchedMovies;
+import service.UserService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -85,7 +86,7 @@ public class ReviewRepository {
 
         try {
             PreparedStatement psmt = conn.prepareStatement(sql);
-            psmt.setString(1, UserController.loginUserId);
+            psmt.setString(1, UserService.loginUserId);
 
             ResultSet resultSet = psmt.executeQuery();
 
@@ -117,7 +118,7 @@ public class ReviewRepository {
 
         try {
             PreparedStatement psmt = conn.prepareStatement(sql);
-            psmt.setString(1, UserController.loginUserId);
+            psmt.setString(1, UserService.loginUserId);
 
             ResultSet resultSet = psmt.executeQuery();
 
