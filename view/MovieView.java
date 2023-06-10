@@ -1,5 +1,6 @@
 package view;
 
+import controller.MovieController;
 import controller.UserController;
 import controller.ReviewController;
 import domain.dto.UserDto;
@@ -103,7 +104,7 @@ public class MovieView {
             switch(menu) {
                 case 1 :
                     // 영화 시청..
-
+                    MovieController.getController().watchMovie();
                     break;
                 case 2 :
                     // 리뷰 작성..

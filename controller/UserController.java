@@ -35,8 +35,11 @@ public class UserController {
             return ;
         }
 
-        // 일반고객 모드..
+        // 로그인 정보 전역에 저장..
         loginUserId = user.getUserId();
+        loginUserSeq = user.getUser_seq();
+
+        // 일반고객 모드..
         MovieView.getView().customerMenu();
     }
 

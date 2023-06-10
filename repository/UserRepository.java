@@ -31,6 +31,7 @@ public class UserRepository {
             ResultSet resultSet = psmt.executeQuery();
 
             while (resultSet.next()) {
+                user.setUser_seq(resultSet.getInt("user_seq"));
                 user.setUserId(resultSet.getString("user_id"));
                 user.setUserEmail(resultSet.getString("user_email"));
                 user.setUserPwd(resultSet.getString("user_pwd"));
