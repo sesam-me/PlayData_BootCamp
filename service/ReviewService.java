@@ -1,6 +1,7 @@
 package service;
 
 import controller.UserController;
+import domain.dto.MyReviewDto;
 import domain.dto.ReviewDto;
 import domain.dto.UserDto;
 import domain.dto.WatchedMovies;
@@ -8,6 +9,7 @@ import repository.ReviewRepository;
 import repository.UserRepository;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 public class ReviewService {
@@ -75,5 +77,16 @@ public class ReviewService {
         }
 
         System.out.println("리뷰 등록 에러");
+    }
+
+    public void myReviewList() {
+        for (MyReviewDto review : ReviewRepository.getRepository().myReviewList()) {
+            System.out.println("*******************");
+            System.out.println(review.getTitle() + " 에 대해 작성하신 리뷰 입니다.");
+            System.out.println("평점 : " + review.getRating());
+            System.out.println("내용 : " + review.getContents());
+            System.out.println("*******************");
+        }
+
     }
 }

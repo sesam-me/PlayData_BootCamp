@@ -2,6 +2,7 @@ package repository;
 
 import config.JdbcConnection;
 import controller.UserController;
+import domain.dto.MyReviewDto;
 import domain.dto.ReviewDto;
 import domain.dto.WatchedMovies;
 
@@ -95,6 +96,39 @@ public class ReviewRepository {
         }
 
         return watchedMovieList;
+    }
+
+    public List<MyReviewDto> myReviewList() {
+        Connection conn = new JdbcConnection().getJdbc();
+
+        List<MyReviewDto> myReviewList = new ArrayList<>();
+
+        String sql = "select m.title, r.rating, r.contents, r.review_date  from movie m join review r on m.movie_seq = r.movie_seq left join user u on r.user_seq = u.user_seq where u.user_id = ?";
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setString(1, UserController.loginUserId);
+
+            ResultSet resultSet = psmt.executeQuery();
+
+            while (resultSet.next()) {
+                // 새로운 객체 생성
+                MyReviewDto myReviewDto = new MyReviewDto();
+
+                myReviewDto.setTitle(resultSet.getString("title"));
+                myReviewDto.setRating(resultSet.getInt("rating"));
+                myReviewDto.setContents(resultSet.getString("contents"));
+                myReviewDto.setReviewDate(resultSet.getDate("review_date"));
+
+                myReviewList.add(myReviewDto);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return myReviewList;
+
     }
 
 }

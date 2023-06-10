@@ -2,7 +2,7 @@ package controller;
 
 import domain.dto.UserDto;
 import service.UserService;
-import view.MovieView;
+import view.CommonView;
 
 public class UserController {
     public static String loginUserId;
@@ -16,7 +16,7 @@ public class UserController {
     }
 
     public void mainMenu() {
-        MovieView.getView().mainMenu();
+        CommonView.getView().mainMenu();
     }
 
     public void login(String userId, String userPwd) {
@@ -31,7 +31,7 @@ public class UserController {
 
         // 회원 id가 admin 이라면 admin 모드로..
         if (user.getUserId().equals("admin") && user.getUserPwd().equals("1234")) {
-            MovieView.getView().adminMenu();
+            CommonView.getView().adminMenu();
             return ;
         }
 
@@ -40,7 +40,7 @@ public class UserController {
         loginUserSeq = user.getUser_seq();
 
         // 일반고객 모드..
-        MovieView.getView().customerMenu();
+        CommonView.getView().customerMenu();
     }
 
     public void signUp(UserDto dto) {

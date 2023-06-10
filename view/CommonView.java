@@ -7,11 +7,11 @@ import domain.dto.UserDto;
 
 import java.util.Scanner;
 
-public class MovieView {
-    private static MovieView view;
-    public static MovieView getView() {
+public class CommonView {
+    private static CommonView view;
+    public static CommonView getView() {
         if (view == null) {
-            view = new MovieView();
+            view = new CommonView();
         }
         return view;
     }
@@ -61,7 +61,6 @@ public class MovieView {
             System.out.println("========== ADMIN 모드에 오신걸 환영 합니다. ==========");
             System.out.println("========== 메뉴를 선택 해주세요 ==========");
             System.out.println("1. 회원 리스트 조회하기");
-            System.out.println("2. 영화 추가하기");
             System.out.println("0. 로그아웃");
             System.out.print("입력 : ");
 
@@ -96,6 +95,7 @@ public class MovieView {
             System.out.println("========== 메뉴를 선택 해주세요 ==========");
             System.out.println("1. 영화 시청");
             System.out.println("2. 리뷰 작성");
+            System.out.println("3. 내가 쓴 리뷰 보기");
             System.out.println("0. 종료");
             System.out.print("입력 : ");
 
@@ -109,6 +109,10 @@ public class MovieView {
                 case 2 :
                     // 리뷰 작성..
                     ReviewController.getController().insertReview();
+                    break;
+                case 3 :
+                    // 내가 쓴 리뷰 보기..
+                    ReviewController.getController().myReviewList();
                     break;
                 case 0 :
                     // 종료
