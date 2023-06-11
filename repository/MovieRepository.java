@@ -2,6 +2,7 @@ package repository;
 
 import config.JdbcConnection;
 import controller.UserController;
+import domain.dto.ActorDto;
 import domain.dto.MovieDto;
 import domain.dto.UserDto;
 import domain.dto.WatchedMovies;
@@ -103,6 +104,29 @@ public class MovieRepository {
             psmt.setString(6, movieDto.getGenre());
             psmt.setString(7, movieDto.getDirector());
             psmt.setString(8, movieDto.getLink());
+
+            if (psmt.executeUpdate() == 0) {
+                return 1;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+
+    }
+
+    public int insertMovieActor(ActorDto actorDto) {
+        Connection conn = new JdbcConnection().getJdbc();
+
+        String sql = "INSERT INTO Actor (name, birth_date, nation, gender)\n" +
+                "values (?, ?, ?, ?);";
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setString(1, actorDto.getName());
+            psmt.setObject(2, actorDto.getBirthDate());
+            psmt.setString(3, actorDto.getNation());
+            psmt.setString(4, actorDto.getGender());
 
             if (psmt.executeUpdate() == 0) {
                 return 1;

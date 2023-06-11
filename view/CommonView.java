@@ -93,6 +93,10 @@ public class CommonView {
                     // 영화 추가하기.
                     MovieController.getController().insertMovieInfo();
                     break;
+                case 6 :
+                    // 배우 추가하기.
+                    MovieController.getController().insertActorInfo();
+                    break;
                 case 0 :
                     // 종료
                     System.out.println("어드민 시스템을 종료 합니다.");

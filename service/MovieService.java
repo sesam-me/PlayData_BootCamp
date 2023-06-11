@@ -1,6 +1,7 @@
 package service;
 
 import controller.MovieController;
+import domain.dto.ActorDto;
 import domain.dto.MovieDto;
 import repository.MovieRepository;
 
@@ -105,5 +106,32 @@ public class MovieService {
         }
 
         System.out.println("영화 추가 완료 !");
+    }
+
+    public void insertActorInfo() {
+        Scanner sc = new Scanner(System.in);
+        ActorDto actorDto = new ActorDto();
+
+        System.out.println("========== 배우 추가 모드 입니다. ==========");
+
+        System.out.println("배우의 이름을 입력 해주세요.");
+        actorDto.setName(sc.nextLine());
+
+        System.out.println("배우의 생년월일을 입력 해주세요. (yyyy-MM-dd)");
+        LocalDate date = LocalDate.parse(sc.nextLine(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        actorDto.setBirthDate(date);
+
+        System.out.println("배우의 국적을 입력해주세요.");
+        actorDto.setNation(sc.nextLine());
+
+        System.out.println("배우의 성별을 입력 해주세요.");
+        actorDto.setGender(sc.nextLine());
+
+        if (MovieRepository.getRepository().insertMovieActor(actorDto) == 1) {
+            System.out.println("배우 추가 에러 !");
+        }
+
+        System.out.println("배우 추가가 완료 되었습니다.");
+
     }
 }

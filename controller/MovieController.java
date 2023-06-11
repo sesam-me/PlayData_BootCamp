@@ -17,4 +17,8 @@ public class MovieController {
     public void insertMovieInfo() {
         MovieService.getService().insertMovieInfo();
     }
+
+    public void insertActorInfo() {
+        MovieService.getService().insertActorInfo();
+    }
 }
