@@ -62,7 +62,8 @@ public class CommonView {
             System.out.println("========== 메뉴를 선택 해주세요 ==========");
             System.out.println("1. 회원 전체조회 하기");
             System.out.println("2. 회원 ID로 검색하기");
-            System.out.println("3. 리뷰 삭제하기");
+            System.out.println("3. 회원 삭제 하기");
+            System.out.println("4. 리뷰 삭제하기");
             System.out.println("0. 로그아웃");
             System.out.print("입력 : ");
 
@@ -78,6 +79,10 @@ public class CommonView {
                     UserController.getController().findByUserId();
                     break;
                 case 3 :
+                    // 회원 ID 삭제.
+                    UserController.getController().deleteUser();
+                    break;
+                case 4 :
                     // 리뷰 삭제하기
                     ReviewController.getController().deleteReview();
                     break;

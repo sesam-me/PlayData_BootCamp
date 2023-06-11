@@ -129,6 +129,56 @@ public class UserRepository {
         return userList;
     }
 
+    public List<UserDto> userList(){
+        Connection conn = new JdbcConnection().getJdbc();
+
+        String sql = "select * from user;";
+
+        List<UserDto> userList = new ArrayList<>();
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet resultSet = psmt.executeQuery();
+
+            while (resultSet.next()){
+                UserDto userDto = new UserDto();
+                userDto.setUser_seq(resultSet.getInt("user_seq"));
+                userDto.setUserId(resultSet.getString("user_id"));
+
+                userList.add(userDto);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return userList;
+
+    }
+
+    //    회원 삭제
+    public int deleteUser(int userSeq) {
+        Connection conn = new JdbcConnection().getJdbc();
+
+        String sql = "delete from user where user_seq = ?";
+
+        int result = 0;
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, userSeq);
+
+            int rowsAffected = psmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                result = 1; // 요청이 성공한 경우 result 값을 1.
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return result;
+    }
 
 
 }

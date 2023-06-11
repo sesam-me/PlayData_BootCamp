@@ -77,5 +77,29 @@ public class UserService {
 
     }
 
+    public void deleteUser() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("사용자 ID 리스트입니다. 삭제할 사용자 넘버를 입력하세요.");
+
+        List<UserDto> userList = UserRepository.getRepository().userList();
+        for (UserDto user : userList) {
+            System.out.print(user.getUser_seq() + ". ");
+            System.out.print(user.getUserId());
+            System.out.println();
+        }
+
+        System.out.println("사용자 ID 입력 : ");
+        int userseq = Integer.parseInt(sc.nextLine());
+
+        int resultNumber = UserRepository.getRepository().deleteUser(userseq);
+
+        if (resultNumber == 1){
+            System.out.println("회원 삭제가 완료되었습니다.");
+        } else {
+            System.out.println("회원 삭제 에러");
+        }
+    }
+
 
 }

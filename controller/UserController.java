@@ -36,5 +36,8 @@ public class UserController {
         UserService.getService().findByUserList();
     }
 
+    public void deleteUser(){
+        UserService.getService().deleteUser();
+    }
 
 }
