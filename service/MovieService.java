@@ -6,6 +6,8 @@ import repository.MovieRepository;
 
 import java.awt.*;
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -64,5 +66,44 @@ public class MovieService {
 
     public int watchMovie(int movie_seq) {
         return MovieRepository.getRepository().watchMovie(movie_seq);
+    }
+
+    public void insertMovieInfo() {
+        Scanner sc = new Scanner(System.in);
+
+        MovieDto movieDto = new MovieDto();
+
+        // 정보를 전부 다 받자..
+        System.out.println("영화의 제목을 입력 해주세요.");
+        movieDto.setTitle(sc.nextLine());
+
+        System.out.println("영화의 개봉일을 입력 해주세요. (yyyy-MM-dd)");
+        LocalDate date = LocalDate.parse(sc.nextLine(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        movieDto.setReleaseDate(date);
+
+        System.out.println("영화의 상영시간을 숫자로 입력 해주세요.");
+        movieDto.setDuration(Integer.parseInt(sc.nextLine()));
+
+        System.out.println("영화의 설명을 입력 해주세요.");
+        movieDto.setDescription(sc.nextLine());
+
+        System.out.println("영화의 상영 등급을 입력 해주세요. (나이제한)");
+        movieDto.setRating(sc.nextLine());
+
+        System.out.println("영화의 장르를 입력 해주세요.");
+        movieDto.setGenre(sc.nextLine());
+
+        System.out.println("영화의 감독을 입력 해주세요.");
+        movieDto.setDirector(sc.nextLine());
+
+        System.out.println("영화의 링크를 입력 해주세요.");
+        movieDto.setLink(sc.nextLine());
+
+        if (MovieRepository.getRepository().insertMovieInfo(movieDto) == 1) {
+            System.out.println("영화 추가 에러 !");
+            return ;
+        }
+
+        System.out.println("영화 추가 완료 !");
     }
 }

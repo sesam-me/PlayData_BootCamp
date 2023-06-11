@@ -64,6 +64,9 @@ public class CommonView {
             System.out.println("2. 회원 ID로 검색하기");
             System.out.println("3. 회원 삭제 하기");
             System.out.println("4. 리뷰 삭제하기");
+            System.out.println("5. 영화 추가하기");
+            System.out.println("6. 배우 추가하기");
+            System.out.println("7. 영화 출연진 추가 하기");
             System.out.println("0. 로그아웃");
             System.out.print("입력 : ");
 
@@ -83,8 +86,12 @@ public class CommonView {
                     UserController.getController().deleteUser();
                     break;
                 case 4 :
-                    // 리뷰 삭제하기
+                    // 리뷰 삭제하기.
                     ReviewController.getController().deleteReview();
+                    break;
+                case 5 :
+                    // 영화 추가하기.
+                    MovieController.getController().insertMovieInfo();
                     break;
                 case 0 :
                     // 종료

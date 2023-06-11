@@ -86,4 +86,31 @@ public class MovieRepository {
 
         return result;
     }
+
+    public int insertMovieInfo(MovieDto movieDto) {
+        Connection conn = new JdbcConnection().getJdbc();
+
+        String sql = "insert into Movie (title, release_date, duration, description, rating, genre, director, link) \n" +
+                "values (? ,?, ?, ?, ?, ?, ?, ?);";
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setString(1, movieDto.getTitle());
+            psmt.setObject(2, movieDto.getReleaseDate());
+            psmt.setInt(3, movieDto.getDuration());
+            psmt.setString(4, movieDto.getDescription());
+            psmt.setString(5, movieDto.getRating());
+            psmt.setString(6, movieDto.getGenre());
+            psmt.setString(7, movieDto.getDirector());
+            psmt.setString(8, movieDto.getLink());
+
+            if (psmt.executeUpdate() == 0) {
+                return 1;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+
+    }
 }

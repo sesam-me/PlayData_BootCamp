@@ -13,4 +13,8 @@ public class MovieController {
     public void watchMovie() {
         System.out.println(MovieService.getService().shownMovies());
     }
+
+    public void insertMovieInfo() {
+        MovieService.getService().insertMovieInfo();
+    }
 }
