@@ -21,4 +21,8 @@ public class MovieController {
     public void insertActorInfo() {
         MovieService.getService().insertActorInfo();
     }
+
+    public void movieInsertActor() {
+        MovieService.getService().movieInsertActor();
+    }
 }

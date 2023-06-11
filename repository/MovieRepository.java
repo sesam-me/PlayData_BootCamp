@@ -137,4 +137,73 @@ public class MovieRepository {
         return 0;
 
     }
+
+    public int movieInsertActor(int movieSeq, int actorSeq) {
+        Connection conn = new JdbcConnection().getJdbc();
+        String sql = "insert into movie_actor (movie_seq, actor_seq) values(?, ?);";
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, movieSeq);
+            psmt.setInt(2, actorSeq);
+
+            if (psmt.executeUpdate() == 0) {
+                return 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return 1;
+    }
+
+    public List<MovieDto> movieList() {
+        Connection conn = new JdbcConnection().getJdbc();
+        String sql = "select movie_seq,title from Movie";
+
+        List<MovieDto> movieDtoList = new ArrayList<>();
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet resultSet = psmt.executeQuery();
+
+            while (resultSet.next()) {
+
+                MovieDto movieDto = new MovieDto();
+                movieDto.setMovie_seq(resultSet.getInt("movie_seq"));
+                movieDto.setTitle(resultSet.getString("title"));
+
+                movieDtoList.add(movieDto);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return movieDtoList;
+
+    }
+
+    public List<ActorDto> actorList() {
+        Connection conn = new JdbcConnection().getJdbc();
+        String sql = "select actor_seq,name from Actor;";
+        List<ActorDto> actorDtoList = new ArrayList<>();
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet resultSet = psmt.executeQuery();
+
+            while (resultSet.next()) {
+
+                ActorDto actorDto = new ActorDto();
+                actorDto.setActor_seq(resultSet.getInt("actor_seq"));
+                actorDto.setName(resultSet.getString("name"));
+
+                actorDtoList.add(actorDto);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return actorDtoList;
+    }
 }

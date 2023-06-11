@@ -134,4 +134,42 @@ public class MovieService {
         System.out.println("배우 추가가 완료 되었습니다.");
 
     }
+
+    public void movieInsertActor() {
+
+        Scanner sc = new Scanner(System.in);
+
+        List<MovieDto> movieDtoList = MovieRepository.getRepository().movieList();
+
+
+        System.out.println("배우를 추가하실 영화를 선택 해주세요.");
+
+        for (MovieDto movie : movieDtoList) {
+            System.out.print(movie.getMovie_seq() + ". ");
+            System.out.print(movie.getTitle());
+            System.out.println();
+        }
+
+        int movieSeq = Integer.parseInt(sc.nextLine());
+
+        List<ActorDto> actorDtoList = MovieRepository.getRepository().actorList();
+
+        System.out.println("영화에 출연시킬 배우를 선택 해주세요.");
+
+        for (ActorDto actor : actorDtoList) {
+            System.out.print(actor.getActor_seq() + ". ");
+            System.out.print(actor.getName());
+            System.out.println();
+        }
+
+        int actorSeq = Integer.parseInt(sc.nextLine());
+
+
+        if (MovieRepository.getRepository().movieInsertActor(movieSeq, actorSeq) == 0) {
+            System.out.println("리뷰 등록 에러 !");
+            return ;
+        }
+
+        System.out.println("등록이 완료되었습니다");
+    }
 }
