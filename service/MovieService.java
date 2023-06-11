@@ -10,6 +10,7 @@ import java.net.URI;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MovieService {
@@ -171,5 +172,34 @@ public class MovieService {
         }
 
         System.out.println("등록이 완료되었습니다");
+    }
+
+    public void movieByGenre() {
+        Scanner sc =new Scanner(System.in);
+
+        // 장르로 검색할 영화명을 입력하기
+        Map<Integer, MovieDto> genreMap = MovieRepository.getRepository().genreMap();
+
+        for (Map.Entry<Integer, MovieDto> entry : genreMap.entrySet()) {
+            System.out.print("[" + entry.getValue().getGenre() + "]");
+        }
+
+        System.out.println("");
+        System.out.println("검색을 원하는 장르를 입력시 영화리스트가 나옵니다.");
+
+
+        String genre = sc.nextLine() ;
+
+
+        List<MovieDto> movieList = MovieRepository.getRepository().movieByGenre(genre);
+
+        if(movieList.size() == 0) {
+            System.out.println("해당하는 장르의 영화는 없습니다.");
+            return;
+        }
+
+        for(MovieDto movieDto : movieList) {
+            System.out.println(movieDto.toString());
+        }
     }
 }

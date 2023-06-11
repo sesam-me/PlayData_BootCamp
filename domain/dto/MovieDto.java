@@ -99,4 +99,9 @@ public class MovieDto {
     public void setLink(String link) {
         this.link = link;
     }
+
+    @Override
+    public String toString() {
+        return "제목:" + title + " 개봉일 - " + releaseDate + " 상영시간:" + duration + "분 " + rating + "세 이용가" + " 장르:" + genre + " 감독:" + director ;
+    }
 }

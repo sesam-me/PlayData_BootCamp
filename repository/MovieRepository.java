@@ -13,8 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class MovieRepository {
     private static MovieRepository repository;
@@ -206,4 +205,72 @@ public class MovieRepository {
         }
         return actorDtoList;
     }
+
+    public Map<Integer, MovieDto> genreMap() {
+        Connection conn = new JdbcConnection().getJdbc();
+
+        String sql = "SELECT genre, movie_seq from movie";
+        Map<Integer, MovieDto> movieGenreMap = new HashMap<>();
+
+        Set<String> uniqueGenres = new HashSet<>();
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            ResultSet resultSet = psmt.executeQuery();
+
+            while (resultSet.next()) {
+
+                String genre = resultSet.getString("genre");
+
+                if (!uniqueGenres.contains(genre)) { // 중복된 장르인지 체크
+                    MovieDto genreMap = new MovieDto();
+
+                    genreMap.setMovie_seq(resultSet.getInt("movie_seq"));
+                    genreMap.setGenre(genre);
+
+                    movieGenreMap.put(genreMap.getMovie_seq(), genreMap);
+                    uniqueGenres.add(genre); // 중복된 장르로 체크
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return movieGenreMap;
+    }
+
+    public List<MovieDto> movieByGenre(String genre) {
+
+        Connection conn = new JdbcConnection().getJdbc();
+
+        String sql = "SELECT * FROM movie WHERE genre = ?";
+        List<MovieDto> movieByGenreList = new ArrayList<>();
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setString(1, genre);
+
+            ResultSet resultSet = psmt.executeQuery();
+
+            while (resultSet.next()) {
+                MovieDto movieByGenre = new MovieDto();
+                movieByGenre.setMovie_seq(resultSet.getInt("movie_seq"));
+                movieByGenre.setTitle(resultSet.getString("title"));
+                movieByGenre.setReleaseDate(resultSet.getDate("release_date").toLocalDate());
+                movieByGenre.setDuration(resultSet.getInt("duration"));
+                movieByGenre.setDescription(resultSet.getString("description"));
+                movieByGenre.setRating(resultSet.getString("rating"));
+                movieByGenre.setGenre(resultSet.getString("genre"));
+                movieByGenre.setDirector(resultSet.getString("director"));
+                movieByGenre.setLink(resultSet.getString("link"));
+                movieByGenreList.add(movieByGenre);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return movieByGenreList;
+    }
+
 }
+
