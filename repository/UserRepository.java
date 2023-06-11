@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserRepository {
     private static UserRepository repository;
@@ -96,6 +98,36 @@ public class UserRepository {
         return user;
     }
 
+    public List<UserDto> findByUserList() {
+        Connection conn = new JdbcConnection().getJdbc();
+
+        List<UserDto> userList = new ArrayList<>();
+
+        String sql = "select * from user";
+
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+
+            ResultSet resultSet = psmt.executeQuery();
+
+            while (resultSet.next()) {
+                UserDto user = new UserDto();
+
+                user.setUser_seq(resultSet.getInt("user_seq"));
+                user.setUserId(resultSet.getString("user_id"));
+                user.setUserEmail(resultSet.getString("user_email"));
+                user.setUserPwd(resultSet.getString("user_pwd"));
+
+                userList.add(user);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return userList;
+    }
 
 
 

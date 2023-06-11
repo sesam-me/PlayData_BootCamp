@@ -47,4 +47,9 @@ public class UserDto {
     public void setUserPwd(String userPwd) {
         this.userPwd = userPwd;
     }
+
+    @Override
+    public String toString() {
+        return "회원번호 : " + user_seq + " 번, " +  " ID : " + userId + ", Email : " + userEmail ;
+    }
 }

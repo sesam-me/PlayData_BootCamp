@@ -26,4 +26,15 @@ public class UserController {
         System.out.println(UserService.getService().signUp(dto));
     }
 
+    public void findByUserId() {
+        UserDto user = UserService.getService().findByUserId();
+
+        System.out.println(user.toString());
+    }
+
+    public void findByUserList() {
+        UserService.getService().findByUserList();
+    }
+
+
 }

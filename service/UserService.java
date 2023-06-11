@@ -4,6 +4,9 @@ import domain.dto.UserDto;
 import repository.UserRepository;
 import view.CommonView;
 
+import java.util.List;
+import java.util.Scanner;
+
 public class UserService {
     public static String loginUserId;
     public static int loginUserSeq;
@@ -52,6 +55,25 @@ public class UserService {
 
         resultMsg = "회원가입에 성공 하셨습니다.";
         return resultMsg;
+
+    }
+
+    public UserDto findByUserId() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("회원 아이디를 입력하세요");
+
+        String user_id = sc.nextLine();
+
+        return UserRepository.getRepository().findByUserId(user_id);
+    }
+
+    public void findByUserList() {
+        List<UserDto> userList = UserRepository.getRepository().findByUserList();
+
+        for (UserDto user : userList) {
+            System.out.println(user);
+        }
 
     }
 

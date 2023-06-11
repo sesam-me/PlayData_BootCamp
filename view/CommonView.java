@@ -60,8 +60,9 @@ public class CommonView {
         do {
             System.out.println("========== ADMIN 모드에 오신걸 환영 합니다. ==========");
             System.out.println("========== 메뉴를 선택 해주세요 ==========");
-            System.out.println("1. 회원 리스트 조회하기");
-            System.out.println("2. 리뷰 삭제하기");
+            System.out.println("1. 회원 전체조회 하기");
+            System.out.println("2. 회원 ID로 검색하기");
+            System.out.println("3. 리뷰 삭제하기");
             System.out.println("0. 로그아웃");
             System.out.print("입력 : ");
 
@@ -69,10 +70,14 @@ public class CommonView {
 
             switch(menu) {
                 case 1 :
-                    // 회원리스트 조회.
-                    System.out.println("회원 리스트 조회하기");
+                    // 회원 전체 조회.
+                    UserController.getController().findByUserList();
                     break;
                 case 2 :
+                    // 회원 ID 검색.
+                    UserController.getController().findByUserId();
+                    break;
+                case 3 :
                     // 리뷰 삭제하기
                     ReviewController.getController().deleteReview();
                     break;
