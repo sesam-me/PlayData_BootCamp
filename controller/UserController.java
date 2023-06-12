@@ -44,4 +44,6 @@ public class UserController {
         UserService.getService().fixByUserPw();
     }
 
+    public void informatoinInq() { UserService.getService().getUserByUserId();}
+
 }

@@ -120,5 +120,9 @@ public class UserService {
 
     }
 
+    public void getUserByUserId() {
+        UserDto userList = UserRepository.getRepository().findByUserId(UserService.loginUserId);
+        System.out.println(userList);
+    }
 
 }

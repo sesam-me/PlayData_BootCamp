@@ -216,9 +216,14 @@ public class MovieService {
         }
 
         //출연진 보여주기
-        System.out.println("영화의 seq를 입력해주세요.");
+        System.out.println("영화의 번호를 입력해주세요.");
         int movieSeqByDelete = Integer.parseInt(sc.nextLine());
         List<ActorDto> actorDtoList = MovieRepository.getRepository().movieSelectActor(movieSeqByDelete);
+
+        if (actorDtoList.size() == 0) {
+            System.out.println("아직 등록된 출연진이 없어요");
+            return ;
+        }
 
         for (ActorDto acotr : actorDtoList) {
             System.out.print(acotr.getActor_seq() + ". ");
@@ -227,7 +232,7 @@ public class MovieService {
         }
 
         //출연진 삭제하기
-        System.out.println("삭제할 배우의 seq를 입력해주세요.");
+        System.out.println("삭제할 배우의 번호 입력해주세요.");
 
         int actorSeqByDelete = Integer.parseInt(sc.nextLine());
 
