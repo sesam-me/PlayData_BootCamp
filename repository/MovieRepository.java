@@ -1,11 +1,8 @@
 package repository;
 
 import config.JdbcConnection;
-import controller.UserController;
 import domain.dto.ActorDto;
 import domain.dto.MovieDto;
-import domain.dto.UserDto;
-import domain.dto.WatchedMovies;
 import service.UserService;
 
 import java.sql.Connection;
@@ -61,6 +58,12 @@ public class MovieRepository {
             throw new RuntimeException(e);
         }
 
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return shownMoviesList;
     }
 
@@ -80,6 +83,12 @@ public class MovieRepository {
                 result = 1;
             }
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -110,6 +119,13 @@ public class MovieRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return 0;
 
     }
@@ -133,6 +149,13 @@ public class MovieRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return 0;
 
     }
@@ -149,6 +172,12 @@ public class MovieRepository {
             if (psmt.executeUpdate() == 0) {
                 return 0;
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -178,6 +207,13 @@ public class MovieRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return movieDtoList;
 
     }
@@ -203,6 +239,14 @@ public class MovieRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
         return actorDtoList;
     }
 
@@ -236,6 +280,13 @@ public class MovieRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return movieGenreMap;
     }
 
@@ -269,6 +320,13 @@ public class MovieRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return movieByGenreList;
     }
 

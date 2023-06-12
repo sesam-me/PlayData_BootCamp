@@ -43,6 +43,12 @@ public class UserRepository {
             throw new RuntimeException(e);
         }
 
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return user;
     }
 
@@ -66,6 +72,13 @@ public class UserRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return result;
 
     }
@@ -91,6 +104,12 @@ public class UserRepository {
                 user.setUserPwd(resultSet.getString("user_pwd"));
             }
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -126,6 +145,12 @@ public class UserRepository {
             throw new RuntimeException(e);
         }
 
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return userList;
     }
 
@@ -151,6 +176,13 @@ public class UserRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return userList;
 
     }
@@ -173,6 +205,12 @@ public class UserRepository {
                 result = 1; // 요청이 성공한 경우 result 값을 1.
             }
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

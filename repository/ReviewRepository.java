@@ -46,6 +46,12 @@ public class ReviewRepository {
             throw new RuntimeException(e);
         }
 
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
 
 
         return result;
@@ -67,6 +73,12 @@ public class ReviewRepository {
                 result = 1;
             }
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -103,6 +115,12 @@ public class ReviewRepository {
             throw new RuntimeException(e);
         }
 
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return watchedMovieList;
     }
 
@@ -131,6 +149,12 @@ public class ReviewRepository {
                 myReviewList.add(myReviewDto);
             }
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -168,6 +192,12 @@ public class ReviewRepository {
             throw new RuntimeException(e);
         }
 
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return reviewList;
 
     }
@@ -201,6 +231,12 @@ public class ReviewRepository {
             throw new RuntimeException(e);
         }
 
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return reviewList;
     }
 
@@ -228,6 +264,12 @@ public class ReviewRepository {
                 reviewdto.setReviewRating(resultSet.getInt("reviewRating"));
                 reviewList.add(reviewdto);
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -91,10 +91,6 @@ public class RatedMovieDto {
 
     @Override
     public String toString() {
-//        System.out.println("--------------------------------------------------\n");
-//        System.out.println("| 제목      | 개봉일      | 상영시간 | 설명           | 나이제한 | 장르    | 감독    | 리뷰평점 |\n");
-//        System.out.println("--------------------------------------------------\n");
-
         StringBuilder sb = new StringBuilder();
 
         sb.append(String.format("| %-10s | %-10s | %-8s | %-15s | %-8s | %-6s | %-6s | %-8s |\n",
