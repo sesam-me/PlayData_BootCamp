@@ -25,4 +25,6 @@ public class ReviewController {
         System.out.println(ReviewService.getService().findAllReviewList());
     }
 
+    public void showRatedMovies() {ReviewService.getService().sortOrder();}
+
 }

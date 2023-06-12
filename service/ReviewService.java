@@ -168,6 +168,35 @@ public class ReviewService {
         result = "선택하신 리뷰가 삭제 되었습니다.";
         return result;
 
+    }
 
+    public int sortOrder(){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("1. 높은 평점순으로 보기");
+        System.out.println("2. 낮은 평점순으로 보기");
+
+        int sortorder = Integer.parseInt(sc.nextLine());
+
+        switch (sortorder) {
+            case 1 :
+                // 높은순
+                System.out.println("평점 높은 영화순 입니다.");
+                List<RatedMovieDto> highReviewListDto =  ReviewRepository.getRepository().showRatedMovies("desc");
+                for (RatedMovieDto review : highReviewListDto) {
+                    System.out.println(review);
+                }
+                break;
+
+            case 2 :
+                // 낮은순
+                System.out.println("평점 낮은 영화순 입니다.");
+                List<RatedMovieDto> rowReviewListDto =  ReviewRepository.getRepository().showRatedMovies("asc");
+                for (RatedMovieDto review : rowReviewListDto) {
+                    System.out.println(review);
+                }
+                break;
+        }
+        return sortorder;
     }
 }
