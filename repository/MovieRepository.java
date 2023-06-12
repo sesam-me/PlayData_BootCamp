@@ -438,10 +438,7 @@ public class MovieRepository {
 
     public List<MovieDto> movieByActor(int actor) {
         Connection conn = new JdbcConnection().getJdbc();
-        String sql = "select m.movie_seq, m.title, m.release_date, m.duration, m.description, m.rating, m.genre, m.director" +
-                ", m.link " +
-                "from movie_actor as ma join movie as m on ma.movie_seq = m.movie_seq " +
-                "where m.movie_seq = ?;";
+        String sql = "select m.movie_seq, m.title, m.release_date, m.duration, m.description, m.rating, m.genre, m.director, m.link from movie_actor as ma join movie as m on ma.movie_seq = m.movie_seq where ma.actor_seq = ?";
 
         List<MovieDto> movieDtoList = new ArrayList<>();
 
