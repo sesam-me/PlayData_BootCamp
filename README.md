@@ -6,12 +6,21 @@
 
 ## Index
 
-기간 : 2023.06.07-2023.06.11
+
+
+
 
 
 ## Contents
-  내용 : 영화 사이트의 관리자 모드, 사용자 모드 시스템
- 
+기간 : 2023.06.07-2023.06.11
+내용 : 영화 사이트의 관리자 모드, 사용자 모드 시스템
+
+## ERD
+![image](https://github.com/sesam-me/PlayData_BootCamp/assets/122416681/11d6b4ee-3a49-4e25-9987-c89693559b92)
+
+[ERD링크]<https://www.erdcloud.com/d/Zjxy3xfjEpDhucjbk>
+
+
 ## Contributing
 회원가입, 로그인, 회원 ID 삭제, 영화 평점순 보기, 영화 감독 별 검색
 
