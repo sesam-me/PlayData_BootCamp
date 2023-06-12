@@ -239,6 +239,8 @@ public class MovieService {
     public void searchDirector(){
         Scanner sc = new Scanner(System.in);
 
+        System.out.println(MovieRepository.getRepository().getAllDirector());
+
         System.out.println("감독이름을 입력하세요.");
         String directorName = sc.nextLine();
 

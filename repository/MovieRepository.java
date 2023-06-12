@@ -468,7 +468,45 @@ public class MovieRepository {
         } catch (SQLException e) {
             throw   new RuntimeException(e);
         }
+
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return movieDtoList;
+    }
+
+    public List<String> getAllDirector(){
+        Connection conn = new JdbcConnection().getJdbc();
+
+        String sql = "select distinct director from movie";
+
+        List<String> directors =new ArrayList<>();
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+
+            ResultSet resultSet = psmt.executeQuery();
+
+            while (resultSet.next()){
+                directors.add(resultSet.getString("director"));
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return directors;
+
     }
 
 }
