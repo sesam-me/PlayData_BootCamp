@@ -381,6 +381,13 @@ public class MovieRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return actorDtoList;
     }
 
@@ -416,6 +423,12 @@ public class MovieRepository {
             }
 
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
