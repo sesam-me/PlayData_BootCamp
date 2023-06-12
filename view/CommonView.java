@@ -67,6 +67,7 @@ public class CommonView {
             System.out.println("5. 영화 추가하기");
             System.out.println("6. 배우 추가하기");
             System.out.println("7. 영화 출연진 추가 하기");
+            System.out.println("8. 영화 출연진 삭제 하기");
             System.out.println("0. 로그아웃");
             System.out.print("입력 : ");
 
@@ -100,6 +101,10 @@ public class CommonView {
                 case 7 :
                     // 영화에 출연할 배우 추가하기
                     MovieController.getController().movieInsertActor();
+                    break;
+                case 8 :
+                    // 영화에 출연한 배우 추가하기
+                    MovieController.getController().deleteActor();
                     break;
                 case 0 :
                     // 종료

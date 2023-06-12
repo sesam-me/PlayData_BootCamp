@@ -26,4 +26,8 @@ public class MovieController {
         MovieService.getService().movieInsertActor();
     }
     public void movieByGenre() { MovieService.getService().movieByGenre();}
+
+    public void deleteActor() {
+        MovieService.getService().movieSelectActor();
+    }
 }
