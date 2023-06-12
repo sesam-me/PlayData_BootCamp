@@ -101,5 +101,24 @@ public class UserService {
         }
     }
 
+    public void fixByUserPw(){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("현재 비밀번호를 입력하세요");
+        String enteredPw = sc.nextLine();
+        String userPw = UserRepository.getRepository().findByUserPw(UserService.loginUserId).getUserPwd();
+        if (!enteredPw.equals(userPw)){
+            System.out.println("비밀번호가 틀렸습니다");
+            return ;
+        }
+
+        System.out.println("변경할 비밀번호를 입력하세요");
+        String changePw = sc.nextLine();
+        UserRepository.getRepository().fixByUserPw(changePw);
+
+        System.out.println("비밀번호 변경이 완료되었습니다");
+
+    }
+
 
 }

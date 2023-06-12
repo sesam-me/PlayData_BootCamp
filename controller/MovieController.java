@@ -34,4 +34,5 @@ public class MovieController {
     public void getMovieByDiector(){MovieService.getService().searchDirector();}
 
     public void movieByActor() { MovieService.getService().movieByActor();}
+
 }

@@ -2,6 +2,7 @@ package repository;
 
 import config.JdbcConnection;
 import domain.dto.UserDto;
+import service.UserService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -218,5 +219,62 @@ public class UserRepository {
         return result;
     }
 
+    public UserDto findByUserPw(String nowPw) {
+        Connection conn = new JdbcConnection().getJdbc();
+
+        String sql = "select * from user where user_id = ?";
+
+        UserDto user = new UserDto();
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+
+            psmt.setString(1, nowPw);
+
+            ResultSet resultSet = psmt.executeQuery();
+
+            while (resultSet.next()) {
+                user.setUser_seq(resultSet.getInt("user_seq"));
+                user.setUserId(resultSet.getString("user_id"));
+                user.setUserEmail(resultSet.getString("user_email"));
+                user.setUserPwd(resultSet.getString("user_pwd"));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return user;
+    }
+
+    public UserDto fixByUserPw(String changePw) {
+        Connection conn = new JdbcConnection().getJdbc();
+
+        String sql = "UPDATE user\n" +
+                "SET user_pwd = ?\n" +
+                "WHERE user_id = ? ;";
+
+        UserDto user = new UserDto();
+
+        try {
+            PreparedStatement psmt = conn.prepareStatement(sql);
+
+            psmt.setString(1, changePw);
+            psmt.setString(2, UserService.loginUserId);
+
+            int rowsAffected = psmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("비밀번호 수정 완료");
+            } else {
+                System.out.println("비밀번호 수정 실패");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return user;
+    }
 
 }
