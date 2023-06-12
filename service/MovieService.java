@@ -235,4 +235,17 @@ public class MovieService {
 
         System.out.println("삭제가 완료되었습니다");
     }
+
+    public void searchDirector(){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("감독이름을 입력하세요.");
+        String directorName = sc.nextLine();
+
+        List<MovieDto> movieByDirector = MovieRepository.getRepository().getMovieByDirector(directorName);
+
+        for (MovieDto movieDto : movieByDirector) {
+            System.out.println(movieDto);
+        }
+    }
 }

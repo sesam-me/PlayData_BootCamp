@@ -30,4 +30,6 @@ public class MovieController {
     public void deleteActor() {
         MovieService.getService().movieSelectActor();
     }
+
+    public void getMovieByDiector(){MovieService.getService().searchDirector();}
 }
