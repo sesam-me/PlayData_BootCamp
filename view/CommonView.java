@@ -132,6 +132,7 @@ public class CommonView {
             System.out.println("5. 영화 장르 별 검색");
             System.out.println("6. 영화 감독 별 검색");
             System.out.println("7. 영화 평점 순으로 보기");
+            System.out.println("8. 특정 배우가 출연한 영화 보기");
 
             System.out.println("0. 종료");
             System.out.print("입력 : ");
@@ -166,6 +167,10 @@ public class CommonView {
                 case 7 :
                     // 영화 평점 순으로 보기..
                     ReviewController.getController().showRatedMovies();
+                    break;
+                case 8 :
+                    // 특정 배우가 출연한 영화 보기
+                    MovieController.getController().movieByActor();
                     break;
                 case 0 :
                     // 종료
