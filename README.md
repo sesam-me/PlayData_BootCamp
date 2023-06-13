@@ -12,13 +12,13 @@
 
 
 ## Contents
-기간 : 2023.06.07-2023.06.11
+기간 : 2023.06.07-2023.06.11 <br/>
 내용 : 영화 사이트의 관리자 모드, 사용자 모드 시스템
 
 ## ERD
-![image](https://github.com/sesam-me/PlayData_BootCamp/assets/122416681/11d6b4ee-3a49-4e25-9987-c89693559b92)
-
-[ERD링크]<https://www.erdcloud.com/d/Zjxy3xfjEpDhucjbk>
+영화, 사용자, 리뷰 테이블 완성
+<img src="https://github.com/sesam-me/PlayData_BootCamp/assets/122416681/c76aa14a-d5c2-4ca2-8a25-a3abc5f7b410"  width="700" height="370"> <br/>
+[ERD링크](https://www.erdcloud.com/d/Zjxy3xfjEpDhucjbk)
 
 
 ## Contributing
